@@ -118,7 +118,6 @@ const ContactForm = () => {
                 boxShadow: '0 40px 80px rgba(0,0,0,0.3)',
                 position: 'relative'
               }}>
-
                 <form onSubmit={handleSubmit}>
                   <Stack spacing={3}>
                     <TextField
