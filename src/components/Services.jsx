@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography, Grid, Card, CardContent, Button, Stack, useTheme, Avatar } from '@mui/material';
+import { Box, Container, Typography, Grid, Card, CardContent, Button, Stack, useTheme, Avatar, CardMedia } from '@mui/material';
 import { motion } from 'framer-motion';
 import SurroundSoundIcon from '@mui/icons-material/SurroundSound';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
@@ -9,28 +9,32 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 const services = [
   {
     title: 'Sound System',
-    icon: <SurroundSoundIcon sx={{ fontSize: 40 }} />,
+    icon: <SurroundSoundIcon sx={{ fontSize: 32 }} />,
+    image: '/assets/Lights/Lights_1.jpg',
     description: 'Immersive audio experiences with high-fidelity speakers and professional digital mixers.',
     price: '₹1,500+',
     color: '#6366f1',
   },
   {
     title: 'Stage Lighting',
-    icon: <LightbulbIcon sx={{ fontSize: 40 }} />,
+    icon: <LightbulbIcon sx={{ fontSize: 32 }} />,
+    image: '/assets/Lights/Lights_3.jpg',
     description: 'Dynamic stage lighting, LED washes, and intelligent movers to create the perfect atmosphere.',
     price: '₹1,000+',
     color: '#f43f5e',
   },
   {
     title: 'Event Decor',
-    icon: <AutoAwesomeIcon sx={{ fontSize: 40 }} />,
+    icon: <AutoAwesomeIcon sx={{ fontSize: 32 }} />,
+    image: '/assets/Decoration/decoration.png',
     description: 'Elegant and customized decorations for weddings, corporate events, and private parties.',
     price: '₹3,000+',
     color: '#f59e0b',
   },
   {
     title: 'DJ & Visuals',
-    icon: <MusicNoteIcon sx={{ fontSize: 40 }} />,
+    icon: <MusicNoteIcon sx={{ fontSize: 32 }} />,
+    image: '/assets/Lights/Lights_2.jpg',
     description: 'High-energy DJ setups, laser shows, and smoke machines for a complete performance.',
     price: '₹2,000+',
     color: '#10b981',
@@ -76,73 +80,79 @@ const Services = () => {
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
-                    p: 2,
-                    position: 'relative',
+                    borderRadius: 4,
+                    overflow: 'hidden',
+                    border: '1px solid rgba(0,0,0,0.05)',
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                     '&:hover': {
-                      '& .service-icon': {
-                        transform: 'scale(1.1) rotate(10deg)',
-                        color: service.color,
-                      },
-                      '& .service-bg': {
-                        opacity: 0.1,
-                      }
+                      transform: 'translateY(-10px)',
+                      boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+                      '& .service-media': { transform: 'scale(1.1)' }
                     }
                   }}
+                  elevation={0}
                 >
-                  {/* Subtle Background Glow */}
-                  <Box
-                    className="service-bg"
-                    sx={{
-                      position: 'absolute',
-                      top: 0, right: 0,
-                      width: '150px', height: '150px',
-                      background: service.color,
-                      filter: 'blur(60px)',
-                      borderRadius: '50%',
-                      opacity: 0.03,
-                      transition: 'opacity 0.3s ease',
-                      zIndex: 0
-                    }}
-                  />
+                  <Box sx={{ position: 'relative', overflow: 'hidden', height: 240 }}>
+                    <CardMedia
+                      component="img"
+                      className="service-media"
+                      image={service.image}
+                      alt={service.title}
+                      sx={{
+                        height: '100%',
+                        transition: 'transform 0.6s ease'
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        top: 16,
+                        right: 16,
+                        width: 48,
+                        height: 48,
+                        bgcolor: 'rgba(255,255,255,0.9)',
+                        backdropFilter: 'blur(4px)',
+                        borderRadius: 2,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: service.color,
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                      }}
+                    >
+                      {service.icon}
+                    </Box>
+                  </Box>
 
-                  <CardContent sx={{ position: 'relative', zIndex: 1 }}>
-                    <Stack direction="row" spacing={3} alignItems="flex-start">
-                      <Avatar
-                        className="service-icon"
-                        sx={{
-                          width: 80,
-                          height: 80,
-                          bgcolor: 'background.paper',
-                          color: 'text.primary',
-                          boxShadow: '0 8px 16px rgba(0,0,0,0.2)',
-                          border: '1px solid rgba(255,255,255,0.1)',
-                          transition: 'all 0.4s ease'
-                        }}
-                      >
-                        {service.icon}
-                      </Avatar>
+                  <CardContent sx={{ p: 4, flexGrow: 1 }}>
+                    <Typography variant="h4" sx={{ mb: 2, fontWeight: 800 }}>
+                      {service.title}
+                    </Typography>
+                    <Typography variant="body1" color="text.secondary" sx={{ mb: 4, lineHeight: 1.8, fontSize: '1.05rem' }}>
+                      {service.description}
+                    </Typography>
+
+                    <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mt: 'auto' }}>
                       <Box>
-                        <Typography variant="h4" sx={{ mb: 1, fontWeight: 700 }}>
-                          {service.title}
+                        <Typography variant="caption" sx={{ fontWeight: 700, opacity: 0.5, display: 'block', mb: 0.5 }}>
+                          STARTING FROM
                         </Typography>
-                        <Typography variant="body1" color="text.secondary" sx={{ mb: 3, lineHeight: 1.7 }}>
-                          {service.description}
+                        <Typography variant="h5" sx={{ fontWeight: 900, color: service.color }}>
+                          {service.price}
                         </Typography>
-                        <Stack direction="row" justifyContent="space-between" alignItems="center">
-                          <Typography variant="h6" sx={{ fontWeight: 800, color: service.color }}>
-                            {service.price}
-                          </Typography>
-                          <Button
-                            variant="text"
-                            color="inherit"
-                            endIcon={<SurroundSoundIcon sx={{ fontSize: 16 }} />}
-                            href="#contact"
-                            sx={{ fontWeight: 700, '&:hover': { color: service.color } }}
-                          >
-                            Inquire
-                          </Button>
-                        </Stack>
                       </Box>
+                      <Button
+                        variant="contained"
+                        sx={{
+                          bgcolor: service.color,
+                          borderRadius: 2,
+                          px: 3,
+                          '&:hover': { bgcolor: service.color, opacity: 0.9 }
+                        }}
+                        href="#contact"
+                      >
+                        Inquire
+                      </Button>
                     </Stack>
                   </CardContent>
                 </Card>

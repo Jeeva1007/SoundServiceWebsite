@@ -38,8 +38,10 @@ const ContactForm = () => {
         {
           from_name: form.name,
           from_email: form.email,
+          user_email: form.email, // Common EmailJS placeholder
           phone: form.phone,
           message: form.message,
+          reply_to: form.email,   // Allows you to reply directly to the user
         }
       )
       .then((res) => {
