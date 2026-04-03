@@ -10,6 +10,7 @@ import Footer from '../components/Footer';
 import Location from '../components/Location';
 import Founders from '../components/Founders';
 import About from '../components/About';
+import AdvancePay from '../components/AdvancePay';
 
 const Home = () => {
     return (
@@ -22,6 +23,7 @@ const Home = () => {
             <ContactForm />
             <Founders />
             <Location />
+            <AdvancePay />
             <Footer />
         </Box>
     );
