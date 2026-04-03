@@ -4,30 +4,32 @@ import { motion } from 'framer-motion';
 import CallIcon from '@mui/icons-material/Call';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import VerifiedIcon from '@mui/icons-material/Verified';
-
-const founders = [
-    {
-        name: 'B. Rajendiran',
-        role: 'Founder & Visionary',
-        phone: '8098832247',
-        address: 'Elambalur, Perambalur District',
-        pincode: '621212',
-        image: '/assets/Founders/Rajendiran.jpg',
-        color: '#6366f1'
-    },
-    {
-        name: 'R. Jeeva',
-        role: 'Operations Lead',
-        phone: '6385718694',
-        address: 'Elambalur, Perambalur District',
-        pincode: '621212',
-        image: '/assets/Founders/Jeeva.jpg',
-        color: '#f43f5e'
-    }
-];
+import { useLanguage } from '../context/LanguageContext';
 
 const Founders = () => {
     const theme = useTheme();
+    const { t, language } = useLanguage();
+
+    const founders = [
+        {
+            name: 'B. Rajendiran',
+            role: t.founders.raj.role,
+            phone: '8098832247',
+            address: language === 'en' ? 'Elambalur, Perambalur District' : 'எலம்பலூர், பெரம்பலூர் மாவட்டம்',
+            pincode: '621212',
+            image: '/assets/Founders/Rajendiran.jpg',
+            color: '#6366f1'
+        },
+        {
+            name: 'R. Jeeva',
+            role: t.founders.jeeva.role,
+            phone: '6385718694',
+            address: language === 'en' ? 'Elambalur, Perambalur District' : 'எலம்பலூர், பெரம்பலூர் மாவட்டம்',
+            pincode: '621212',
+            image: '/assets/Founders/Jeeva.jpg',
+            color: '#f43f5e'
+        }
+    ];
 
     return (
         <Box id="founders" sx={{ py: 5, position: 'relative', overflow: 'hidden', bgcolor: 'background.default' }}>
@@ -43,14 +45,13 @@ const Founders = () => {
                         viewport={{ once: true }}
                     >
                         <Typography variant="overline" color="primary" sx={{ fontWeight: 800, letterSpacing: 4 }}>
-                            OUR LEADERSHIP
+                            {t.founders.overline}
                         </Typography>
-                        <Typography variant="h2" sx={{ mt: 1, mb: 2 }}>
-                            The Minds <span className="text-gradient-primary">Driving</span> Excellence
+                        <Typography variant="h2" sx={{ mt: 1, mb: 2, fontSize: { xs: '2.5rem', md: '3.5rem' } }}>
+                            {t.founders.title}
                         </Typography>
                         <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 600, mx: 'auto', fontWeight: 400 }}>
-                            Meet the professionals who ensure every event is a sonic success.
-                            Dedicated to precision and quality in every setup.
+                            {t.founders.subtitle}
                         </Typography>
                     </motion.div>
                 </Box>
@@ -68,6 +69,8 @@ const Founders = () => {
                                     p: { xs: 4, md: 6 },
                                     height: '100%',
                                     position: 'relative',
+                                    borderRadius: 8,
+                                    border: '1px solid rgba(0,0,0,0.05)',
                                     '&:hover .founder-avatar': {
                                         transform: 'scale(1.05)',
                                         borderColor: person.color,
@@ -111,7 +114,7 @@ const Founders = () => {
                                                     <CallIcon />
                                                 </IconButton>
                                                 <Box>
-                                                    <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600 }}>CONTACT</Typography>
+                                                    <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600 }}>{t.founders.contact}</Typography>
                                                     <Typography variant="h6" sx={{ fontWeight: 700 }}>+91 {person.phone}</Typography>
                                                 </Box>
                                             </Box>
@@ -121,7 +124,7 @@ const Founders = () => {
                                                     <LocationOnIcon />
                                                 </IconButton>
                                                 <Box>
-                                                    <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600 }}>LOCATION</Typography>
+                                                    <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600 }}>{t.founders.loc}</Typography>
                                                     <Typography variant="body1" sx={{ fontWeight: 600 }}>{person.address}</Typography>
                                                 </Box>
                                             </Box>
@@ -142,7 +145,7 @@ const Founders = () => {
                                                 transition: 'all 0.3s ease'
                                             }}
                                         >
-                                            Connect with {person.name.split(' ')[1]}
+                                            {t.founders.connect} {person.name.split(' ')[1]}
                                         </Button>
                                     </Stack>
                                 </Card>

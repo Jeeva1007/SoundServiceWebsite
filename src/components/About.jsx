@@ -4,14 +4,16 @@ import { motion } from 'framer-motion';
 import StarIcon from '@mui/icons-material/Star';
 import CelebrationIcon from '@mui/icons-material/Celebration';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import { useLanguage } from '../context/LanguageContext';
 
 const About = () => {
     const theme = useTheme();
+    const { t } = useLanguage();
 
     const features = [
-        { icon: <StarIcon sx={{ color: '#6366f1' }} />, title: '5+ Years Expertise', desc: 'Delivering flawless technical event production since 2019.' },
-        { icon: <CelebrationIcon sx={{ color: '#f43f5e' }} />, title: '100+ Events', desc: 'Successfully managed a diverse range of large-scale celebrations.' },
-        { icon: <CurrencyRupeeIcon sx={{ color: '#f59e0b' }} />, title: 'Premium Value', desc: 'Top-tier equipment at competitive and transparent pricing.' },
+        { icon: <StarIcon sx={{ color: '#6366f1' }} />, title: t.about.stat1.label, desc: t.about.stat1.desc },
+        { icon: <CelebrationIcon sx={{ color: '#f43f5e' }} />, title: t.about.stat2.label, desc: t.about.stat2.desc },
+        { icon: <CurrencyRupeeIcon sx={{ color: '#f59e0b' }} />, title: t.about.stat3.label, desc: t.about.stat3.desc },
     ];
 
     return (
@@ -26,15 +28,13 @@ const About = () => {
                             transition={{ duration: 1 }}
                         >
                             <Typography variant="overline" color="primary" sx={{ fontWeight: 800, letterSpacing: 4 }}>
-                                OUR STORY
+                                {t.about.overline}
                             </Typography>
-                            <Typography variant="h2" sx={{ mt: 1, mb: 4, lineHeight: 1.1 }}>
-                                Precision <span className="text-gradient-primary">Craftsmanship</span> in Every Wave
+                            <Typography variant="h2" sx={{ mt: 1, mb: 4, lineHeight: 1.1, fontSize: { xs: '2.5rem', md: '3.5rem' } }}>
+                                {t.about.title}
                             </Typography>
                             <Typography variant="h6" sx={{ mb: 4, color: 'text.secondary', fontWeight: 400, lineHeight: 1.8 }}>
-                                BODI Sound Service isn't just about equipment; it's about the atmosphere.
-                                We combine technical mastery with creative vision to deliver experiences
-                                that resonate with your audience.
+                                {t.about.description}
                             </Typography>
 
                             <Stack spacing={4} sx={{ mt: 6 }}>
@@ -67,7 +67,6 @@ const About = () => {
                             transition={{ duration: 1 }}
                             style={{ position: 'relative' }}
                         >
-                            {/* Decorative Elements */}
                             <Box sx={{
                                 position: 'absolute',
                                 top: -20, right: -20,
@@ -86,7 +85,7 @@ const About = () => {
                             }}>
                                 <img
                                     src="/assets/Lights/Lights_2.jpg"
-                                    alt="Ahuja Professional Sound Setup"
+                                    alt="Professional Sound Setup"
                                     style={{ width: '100%', display: 'block', backgroundColor: '#fff' }}
                                 />
                                 <Box sx={{
@@ -95,7 +94,7 @@ const About = () => {
                                     p: 4,
                                     background: 'linear-gradient(transparent, rgba(15,23,42,0.9))'
                                 }}>
-                                    <Typography variant="h5" sx={{ color: '#fff', fontWeight: 800 }}>Mastering the Science of Sound</Typography>
+                                    <Typography variant="h5" sx={{ color: '#fff', fontWeight: 800 }}>{t.about.title}</Typography>
                                 </Box>
                             </Box>
                         </motion.div>

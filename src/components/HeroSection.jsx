@@ -4,9 +4,11 @@ import { motion } from 'framer-motion';
 import CallIcon from '@mui/icons-material/Call';
 import SendIcon from '@mui/icons-material/Send';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { useLanguage } from '../context/LanguageContext';
 
 const HeroSection = () => {
     const theme = useTheme();
+    const { t } = useLanguage();
 
     return (
         <Box
@@ -100,10 +102,11 @@ const HeroSection = () => {
                                 letterSpacing: 6,
                                 mb: 2,
                                 display: 'block',
-                                textShadow: '0 0 20px rgba(99, 102, 241, 0.3)'
+                                textShadow: '0 0 20px rgba(99, 102, 241, 0.3)',
+                                fontSize: { xs: '0.7rem', sm: '0.9rem' }
                             }}
                         >
-                            SOUNDS OF PERFECTION
+                            {t.hero.subtitle}
                         </Typography>
                     </motion.div>
 
@@ -113,10 +116,10 @@ const HeroSection = () => {
                             fontWeight: 900,
                             mb: 3,
                             lineHeight: 1.1,
+                            fontSize: { xs: '3rem', md: '5.5rem' }
                         }}
                     >
-                        BODI <span className="text-gradient-primary">Sound</span> <br />
-                        Service
+                        {t.hero.title}
                     </Typography>
 
                     <Typography
@@ -127,10 +130,10 @@ const HeroSection = () => {
                             maxWidth: '700px',
                             mx: 'auto',
                             fontWeight: 400,
+                            fontSize: { xs: '1.1rem', sm: '1.4rem' }
                         }}
                     >
-                        Elevating every event with high-fidelity audio, dynamic lighting, and professional setups.
-                        We bring your vision to life with sonic clarity.
+                        {t.hero.description}
                     </Typography>
 
                     <Stack
@@ -152,7 +155,7 @@ const HeroSection = () => {
                                 borderRadius: 4,
                             }}
                         >
-                            Get Started
+                            {t.hero.cta1}
                         </Button>
 
                         <Button
@@ -170,7 +173,7 @@ const HeroSection = () => {
                                 backdropFilter: 'blur(10px)',
                             }}
                         >
-                            View Our Work
+                            {t.hero.cta2}
                         </Button>
                     </Stack>
                 </motion.div>

@@ -6,9 +6,11 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SendIcon from '@mui/icons-material/Send';
+import { useLanguage } from "../context/LanguageContext";
 
 const ContactForm = () => {
   const theme = useTheme();
+  const { t, language } = useLanguage();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -38,10 +40,10 @@ const ContactForm = () => {
         {
           from_name: form.name,
           from_email: form.email,
-          user_email: form.email, // Common EmailJS placeholder
+          user_email: form.email,
           phone: form.phone,
           message: form.message,
-          reply_to: form.email,   // Allows you to reply directly to the user
+          reply_to: form.email,
         }
       )
       .then((res) => {
@@ -56,9 +58,9 @@ const ContactForm = () => {
   };
 
   const contactInfo = [
-    { icon: <PhoneIcon />, label: "Call Us", value: "+91 80988 32247", sub: "Available 24/7", color: "#6366f1" },
-    { icon: <EmailIcon />, label: "Email Us", value: "contact@bodisounds.com", sub: "Quick Response", color: "#f43f5e" },
-    { icon: <LocationOnIcon />, label: "Visit Us", value: "Elambalur, Perambalur", sub: "Tamil Nadu, 621212", color: "#f59e0b" },
+    { icon: <PhoneIcon />, label: t.contact.call, value: "+91 80988 32247", sub: t.contact.available, color: "#6366f1" },
+    { icon: <EmailIcon />, label: t.contact.email, value: "contact@bodisounds.com", sub: t.contact.response, color: "#f43f5e" },
+    { icon: <LocationOnIcon />, label: t.contact.visit, value: language === 'en' ? 'Elambalur, Perambalur' : 'எலம்பலூர், பெரம்பலூர்', sub: language === 'en' ? 'Tamil Nadu, 621212' : 'தமிழ்நாடு, 621212', color: "#f59e0b" },
   ];
 
   return (
@@ -74,14 +76,13 @@ const ContactForm = () => {
               transition={{ duration: 0.8 }}
             >
               <Typography variant="overline" color="primary" sx={{ fontWeight: 800, letterSpacing: 4 }}>
-                GET IN TOUCH
+                {t.contact.overline}
               </Typography>
               <Typography variant="h2" sx={{ mt: 1, mb: 3 }}>
-                Ready to <span className="text-gradient-primary">Transform</span> Your Event?
+                {t.contact.title1} <span className="text-gradient-primary">{t.contact.title2}</span> {t.contact.title3}
               </Typography>
               <Typography variant="body1" sx={{ color: 'text.secondary', mb: 6, fontSize: '1.1rem', lineHeight: 1.8 }}>
-                Whether it's a grand wedding or a corporate concert, we provide the technical
-                excellence you need. Reach out today for a custom quote.
+                {t.contact.desc}
               </Typography>
 
               <Stack spacing={4}>
@@ -124,7 +125,7 @@ const ContactForm = () => {
                   <Stack spacing={3}>
                     <TextField
                       fullWidth
-                      label="Full Name"
+                      label={t.contact.form.name}
                       name="name"
                       value={form.name}
                       onChange={handleChange}
@@ -136,13 +137,12 @@ const ContactForm = () => {
                           bgcolor: 'background.paper',
                           boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
                           border: '1px solid rgba(0,0,0,0.05)',
-                          '&:hover': { bgcolor: '#f8fafc' }
                         }
                       }}
                     />
                     <TextField
                       fullWidth
-                      label="Phone Number"
+                      label={t.contact.form.phone}
                       name="phone"
                       value={form.phone}
                       onChange={handleChange}
@@ -154,13 +154,12 @@ const ContactForm = () => {
                           bgcolor: 'background.paper',
                           boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
                           border: '1px solid rgba(0,0,0,0.05)',
-                          '&:hover': { bgcolor: '#f8fafc' }
                         }
                       }}
                     />
                     <TextField
                       fullWidth
-                      label="Email Address"
+                      label={t.contact.form.email}
                       name="email"
                       type="email"
                       value={form.email}
@@ -173,13 +172,12 @@ const ContactForm = () => {
                           bgcolor: 'background.paper',
                           boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
                           border: '1px solid rgba(0,0,0,0.05)',
-                          '&:hover': { bgcolor: '#f8fafc' }
                         }
                       }}
                     />
                     <TextField
                       fullWidth
-                      label="Event Details"
+                      label={t.contact.form.details}
                       name="message"
                       value={form.message}
                       onChange={handleChange}
@@ -193,7 +191,6 @@ const ContactForm = () => {
                           bgcolor: 'background.paper',
                           boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
                           border: '1px solid rgba(0,0,0,0.05)',
-                          '&:hover': { bgcolor: '#f8fafc' }
                         }
                       }}
                     />
@@ -206,7 +203,7 @@ const ContactForm = () => {
                       endIcon={!loading && <SendIcon />}
                       sx={{ py: 2.5, borderRadius: 4, fontSize: '1.1rem', boxShadow: '0 10px 30px rgba(99,102,241,0.3)' }}
                     >
-                      {loading ? "Sending Message..." : "Send Inquiry"}
+                      {loading ? t.contact.form.sending : t.contact.form.send}
                     </Button>
                   </Stack>
                 </form>
@@ -228,7 +225,7 @@ const ContactForm = () => {
           variant="filled"
           sx={{ width: '100%', borderRadius: 3, fontWeight: 600 }}
         >
-          Your message has been sent successfully! We'll contact you soon.
+          {t.contact.form.success}
         </Alert>
       </Snackbar>
     </Box>

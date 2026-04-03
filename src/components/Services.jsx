@@ -5,44 +5,46 @@ import SurroundSoundIcon from '@mui/icons-material/SurroundSound';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
-
-const services = [
-  {
-    title: 'Sound System',
-    icon: <SurroundSoundIcon sx={{ fontSize: 32 }} />,
-    image: '/assets/Lights/Lights_1.jpg',
-    description: 'Immersive audio experiences with high-fidelity speakers and professional digital mixers.',
-    price: '₹1,500+',
-    color: '#6366f1',
-  },
-  {
-    title: 'Stage Lighting',
-    icon: <LightbulbIcon sx={{ fontSize: 32 }} />,
-    image: '/assets/Lights/Lights_3.jpg',
-    description: 'Dynamic stage lighting, LED washes, and intelligent movers to create the perfect atmosphere.',
-    price: '₹1,000+',
-    color: '#f43f5e',
-  },
-  {
-    title: 'Event Decor',
-    icon: <AutoAwesomeIcon sx={{ fontSize: 32 }} />,
-    image: '/assets/Decoration/decoration.png',
-    description: 'Elegant and customized decorations for weddings, corporate events, and private parties.',
-    price: '₹3,000+',
-    color: '#f59e0b',
-  },
-  {
-    title: 'DJ & Visuals',
-    icon: <MusicNoteIcon sx={{ fontSize: 32 }} />,
-    image: '/assets/Lights/Lights_2.jpg',
-    description: 'High-energy DJ setups, laser shows, and smoke machines for a complete performance.',
-    price: '₹2,000+',
-    color: '#10b981',
-  },
-];
+import { useLanguage } from '../context/LanguageContext';
 
 const Services = () => {
   const theme = useTheme();
+  const { t } = useLanguage();
+
+  const services = [
+    {
+      title: t.services.items.sound.title,
+      icon: <SurroundSoundIcon sx={{ fontSize: 32 }} />,
+      image: '/assets/Lights/Lights_1.jpg',
+      description: t.services.items.sound.desc,
+      price: '₹1,500+',
+      color: '#6366f1',
+    },
+    {
+      title: t.services.items.lighting.title,
+      icon: <LightbulbIcon sx={{ fontSize: 32 }} />,
+      image: '/assets/Lights/Lights_3.jpg',
+      description: t.services.items.lighting.desc,
+      price: '₹1,000+',
+      color: '#f43f5e',
+    },
+    {
+      title: t.services.items.decor.title,
+      icon: <AutoAwesomeIcon sx={{ fontSize: 32 }} />,
+      image: '/assets/Decoration/decoration.png',
+      description: t.services.items.decor.desc,
+      price: '₹3,000+',
+      color: '#f59e0b',
+    },
+    {
+      title: t.services.items.dj.title,
+      icon: <MusicNoteIcon sx={{ fontSize: 32 }} />,
+      image: '/assets/Lights/Lights_2.jpg',
+      description: t.services.items.dj.desc,
+      price: '₹2,000+',
+      color: '#10b981',
+    },
+  ];
 
   return (
     <Box id="services" sx={{ py: 5, position: 'relative', bgcolor: 'background.default' }}>
@@ -54,14 +56,13 @@ const Services = () => {
             viewport={{ once: true }}
           >
             <Typography variant="overline" color="primary" sx={{ fontWeight: 800, letterSpacing: 4 }}>
-              OUR EXPERTISE
+              {t.services.overline}
             </Typography>
-            <Typography variant="h2" sx={{ mt: 1, mb: 2 }}>
-              Premium <span className="text-gradient-primary">Event</span> Solutions
+            <Typography variant="h2" sx={{ mt: 1, mb: 2, fontSize: { xs: '2.5rem', md: '3.5rem' } }}>
+              {t.services.title}
             </Typography>
             <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 600, mx: 'auto', fontWeight: 400 }}>
-              We provide end-to-end technical production for events of all sizes.
-              Quality equipment matched with professional expertise.
+              {t.services.subtitle}
             </Typography>
           </motion.div>
         </Box>
@@ -135,7 +136,7 @@ const Services = () => {
                     <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mt: 'auto' }}>
                       <Box>
                         <Typography variant="caption" sx={{ fontWeight: 700, opacity: 0.5, display: 'block', mb: 0.5 }}>
-                          STARTING FROM
+                          {t.services.starting}
                         </Typography>
                         <Typography variant="h5" sx={{ fontWeight: 900, color: service.color }}>
                           {service.price}
@@ -151,7 +152,7 @@ const Services = () => {
                         }}
                         href="#contact"
                       >
-                        Inquire
+                        {t.services.inquire}
                       </Button>
                     </Stack>
                   </CardContent>

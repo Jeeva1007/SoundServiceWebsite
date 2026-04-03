@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
-const FullScreenVideoItem = ({ src, title, subtitle, color }) => {
+const FullScreenVideoItem = ({ src, title, subtitle, color, overline }) => {
     const videoRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
     const theme = useTheme();
@@ -104,7 +105,7 @@ const FullScreenVideoItem = ({ src, title, subtitle, color }) => {
                                     textShadow: `0 0 20px ${color}40`
                                 }}
                             >
-                                EXPERIENCE THE SOUND
+                                {overline}
                             </Typography>
                             <Typography
                                 variant="h1"
@@ -140,23 +141,24 @@ const FullScreenVideoItem = ({ src, title, subtitle, color }) => {
 };
 
 const VideoSection = () => {
+    const { t } = useLanguage();
     const videos = [
         {
             src: "/assets/Videos/videoplayback.mp4",
-            title: "Dynamic Lighting",
-            subtitle: "State-of-the-art stage effects and intelligent lighting systems.",
+            title: t.experience.vid1.title,
+            subtitle: t.experience.vid1.sub,
             color: "#6366f1"
         },
         {
             src: "/assets/Videos/videoplayback (1).mp4",
-            title: "Elite Sound",
-            subtitle: "Crystal clear audio production for massive crowds and intimate venues.",
+            title: t.experience.vid2.title,
+            subtitle: t.experience.vid2.sub,
             color: "#f43f5e"
         },
         {
             src: "/assets/Videos/New_House_warming_function_lighting_decoration_svv_lights_audios_Dharapuram_lightings_1080P.mp4",
-            title: "Function Decor",
-            subtitle: "Transforming standard venues into spectacular visual experiences.",
+            title: t.experience.vid3.title,
+            subtitle: t.experience.vid3.sub,
             color: "#f59e0b"
         }
     ];
@@ -170,6 +172,7 @@ const VideoSection = () => {
                         title={video.title}
                         subtitle={video.subtitle}
                         color={video.color}
+                        overline={t.experience.title}
                     />
                 </Box>
             ))}

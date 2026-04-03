@@ -10,32 +10,39 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import LanguageIcon from '@mui/icons-material/Language';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 const Navbar = ({ toggleTheme, mode }) => {
+    const { language, toggleLanguage, t } = useLanguage();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [langAnchorEl, setLangAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const langOpen = Boolean(langAnchorEl);
     const [mobileContactOpen, setMobileContactOpen] = useState(false);
 
     const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
     const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
     const handleMenuClose = () => setAnchorEl(null);
+    const handleLangOpen = (event) => setLangAnchorEl(event.currentTarget);
+    const handleLangClose = () => setLangAnchorEl(null);
     const handleMobileContactClick = () => setMobileContactOpen(!mobileContactOpen);
 
     const navItems = [
-        { name: 'Home', link: '#home' },
-        { name: 'About', link: '#about' },
-        { name: 'Services', link: '#services' },
-        { name: 'Experience', link: '#video-experience' },
-        { name: 'Gallery', link: '#gallery' },
+        { name: t.nav.home, link: '#home' },
+        { name: t.nav.about, link: '#about' },
+        { name: t.nav.services, link: '#services' },
+        { name: t.nav.experience, link: '#video-experience' },
+        { name: t.nav.gallery, link: '#gallery' },
     ];
 
     const contactItems = [
-        { name: 'Inquire Now', link: '#contact' },
-        { name: 'Our Location', link: '#location' },
-        { name: 'Leadership', link: '#founders' },
+        { name: t.nav.inquire || 'Inquire Now', link: '#contact' },
+        { name: t.nav.location, link: '#location' },
+        { name: t.nav.founders, link: '#founders' },
     ];
 
     const navBtnStyle = {
@@ -90,7 +97,7 @@ const Navbar = ({ toggleTheme, mode }) => {
                             border: '1px solid rgba(255,255,255,0.05)'
                         }}
                     >
-                        Contact {mobileContactOpen ? <ExpandLess /> : <ExpandMore />}
+                        {t.nav.connect} {mobileContactOpen ? <ExpandLess /> : <ExpandMore />}
                     </Button>
                     <Collapse in={mobileContactOpen} timeout="auto" unmountOnExit sx={{ width: '100%' }}>
                         <List component="div" disablePadding sx={{ mt: 1 }}>
@@ -119,7 +126,13 @@ const Navbar = ({ toggleTheme, mode }) => {
                 </ListItem>
             </List>
 
-            <Box sx={{ mt: 'auto', pt: 4, textAlign: 'center' }}>
+            <Box sx={{ mt: 'auto', pt: 4, display: 'flex', justifyContent: 'center', gap: 2 }}>
+                <IconButton onClick={() => toggleLanguage('en')} sx={{ bgcolor: language === 'en' ? 'primary.main' : 'background.paper', color: language === 'en' ? 'white' : 'text.primary' }}>
+                    EN
+                </IconButton>
+                <IconButton onClick={() => toggleLanguage('ta')} sx={{ bgcolor: language === 'ta' ? 'primary.main' : 'background.paper', color: language === 'ta' ? 'white' : 'text.primary' }}>
+                    தமிழ்
+                </IconButton>
                 <IconButton onClick={toggleTheme} sx={{ bgcolor: 'background.paper', p: 2 }}>
                     {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
                 </IconButton>
@@ -158,7 +171,7 @@ const Navbar = ({ toggleTheme, mode }) => {
                                         endIcon={<KeyboardArrowDownIcon />}
                                         sx={{ ...navBtnStyle, mr: 2 }}
                                     >
-                                        Connect
+                                        {t.nav.connect}
                                     </Button>
                                     <Menu
                                         anchorEl={anchorEl}
@@ -194,7 +207,22 @@ const Navbar = ({ toggleTheme, mode }) => {
                                     </Menu>
                                 </Box>
 
-                                <Box sx={{ height: 30, width: 1, bgcolor: 'rgba(255,255,255,0.1)', mx: 2 }} />
+                                <Box sx={{ height: 30, width: 1, bgcolor: 'rgba(0,0,0,0.1)', mx: 2 }} />
+
+                                {/* Language Selector */}
+                                <IconButton onClick={handleLangOpen} sx={{ color: 'text.primary', ml: 1 }}>
+                                    <LanguageIcon />
+                                </IconButton>
+                                <Menu
+                                    anchorEl={langAnchorEl}
+                                    open={langOpen}
+                                    onClose={handleLangClose}
+                                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                                    transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                >
+                                    <MenuItem onClick={() => { toggleLanguage('en'); handleLangClose(); }}>English</MenuItem>
+                                    <MenuItem onClick={() => { toggleLanguage('ta'); handleLangClose(); }}>தமிழ் (Tamil)</MenuItem>
+                                </Menu>
 
                                 <IconButton onClick={toggleTheme} sx={{ color: 'text.primary', ml: 1 }}>
                                     {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
@@ -206,7 +234,7 @@ const Navbar = ({ toggleTheme, mode }) => {
                                     href="#contact"
                                     sx={{ ml: 3, px: 4, borderRadius: 3, fontWeight: 800 }}
                                 >
-                                    Book Now
+                                    {t.nav.book}
                                 </Button>
                             </Box>
 

@@ -1,25 +1,27 @@
 import React from 'react';
 import { Box, Container, Typography, ImageList, ImageListItem, useMediaQuery, useTheme, Card } from '@mui/material';
 import { motion } from 'framer-motion';
-
-const galleryImages = [
-    { src: '/assets/Decoration/decoration.png', title: 'Grand Venue Decoration' },
-    { src: '/assets/Decoration/decoration_1.png', title: 'Event Stage Decor' },
-    { src: '/assets/Decoration/decoration_2.png', title: 'Elegant Floral Setup' },
-    { src: '/assets/Decoration/decoration_3.png', title: 'Luxury Canopy' },
-    { src: '/assets/Decoration/decoration_4.png', title: 'Premium Decor Arrangements' },
-    { src: '/assets/Decoration/decoration_5.png', title: 'Outdoor Festive Setup' },
-    { src: '/assets/Decoration/decoration_6.png', title: 'Traditional Event Decor' },
-    { src: '/assets/Lights/Lights_1.jpg', title: 'Wedding Building Lights' },
-    { src: '/assets/Lights/Lights_2.jpg', title: 'Illuminated Architecture' },
-    { src: '/assets/Lights/Lights_3.jpg', title: 'House Warming Serial Lights' },
-    { src: '/assets/Lights/Lights_4.jpg', title: 'Night Time Event Lighting' },
-];
+import { useLanguage } from '../context/LanguageContext';
 
 const Gallery = () => {
     const theme = useTheme();
+    const { t, language } = useLanguage();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+
+    const galleryImages = [
+        { src: '/assets/Decoration/decoration.png', title: t.gallery.imgs[0] },
+        { src: '/assets/Decoration/decoration_1.png', title: t.gallery.imgs[1] },
+        { src: '/assets/Decoration/decoration_2.png', title: t.gallery.imgs[2] },
+        { src: '/assets/Decoration/decoration_3.png', title: t.gallery.imgs[3] },
+        { src: '/assets/Decoration/decoration_4.png', title: t.gallery.imgs[4] },
+        { src: '/assets/Decoration/decoration_5.png', title: t.gallery.imgs[5] },
+        { src: '/assets/Decoration/decoration_6.png', title: t.gallery.imgs[6] },
+        { src: '/assets/Lights/Lights_1.jpg', title: t.gallery.imgs[7] },
+        { src: '/assets/Lights/Lights_2.jpg', title: t.gallery.imgs[8] },
+        { src: '/assets/Lights/Lights_3.jpg', title: t.gallery.imgs[9] },
+        { src: '/assets/Lights/Lights_4.jpg', title: t.gallery.imgs[10] },
+    ];
 
     const cols = isMobile ? 1 : isTablet ? 2 : 3;
 
@@ -33,14 +35,13 @@ const Gallery = () => {
                         viewport={{ once: true }}
                     >
                         <Typography variant="overline" color="primary" sx={{ fontWeight: 800, letterSpacing: 4 }}>
-                            VISUAL JOURNEY
+                            {t.gallery.overline}
                         </Typography>
-                        <Typography variant="h2" sx={{ mt: 1, mb: 2 }}>
-                            Experience <span className="text-gradient-primary">The Magic</span>
+                        <Typography variant="h2" sx={{ mt: 1, mb: 2, fontSize: { xs: '2.5rem', md: '3.5rem' } }}>
+                            {t.gallery.title}
                         </Typography>
                         <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 600, mx: 'auto', fontWeight: 400 }}>
-                            A showcase of our best work across various venues and event styles.
-                            From intimate gatherings to large-scale productions.
+                            {t.gallery.subtitle}
                         </Typography>
                     </motion.div>
                 </Box>
@@ -91,7 +92,7 @@ const Gallery = () => {
                                                 {item.title}
                                             </Typography>
                                             <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 500 }}>
-                                                Professional Setup
+                                                {t.gallery.setup}
                                             </Typography>
                                         </Box>
                                     </Box>

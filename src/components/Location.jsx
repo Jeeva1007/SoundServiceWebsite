@@ -2,9 +2,11 @@ import React from 'react';
 import { Box, Typography, Container, useTheme, Stack, Avatar } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 const Location = () => {
     const theme = useTheme();
+    const { t, language } = useLanguage();
 
     return (
         <Box id="location" sx={{ height: '50vh', width: '100%', position: 'relative', bgcolor: 'background.paper' }}>
@@ -39,9 +41,9 @@ const Location = () => {
                                 <LocationOnIcon />
                             </Avatar>
                             <Box textAlign="left">
-                                <Typography variant="h4" sx={{ color: '#fff', fontWeight: 900, mb: 0.5 }}>Our Location</Typography>
-                                <Typography variant="h6" sx={{ color: 'primary.light', fontWeight: 700 }}>Elambalur, Perambalur District</Typography>
-                                <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 600 }}>TAMIL NADU - 621212</Typography>
+                                <Typography variant="h4" sx={{ color: '#fff', fontWeight: 900, mb: 0.5 }}>{t.location.title}</Typography>
+                                <Typography variant="h6" sx={{ color: 'primary.light', fontWeight: 700 }}>{language === 'en' ? 'Elambalur, Perambalur District' : 'எலம்பலூர், பெரம்பலூர் மாவட்டம்'}</Typography>
+                                <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 600 }}>{language === 'en' ? 'TAMIL NADU - 621212' : 'தமிழ்நாடு - 621212'}</Typography>
                             </Box>
                         </Stack>
                     </Box>
