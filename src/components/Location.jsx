@@ -27,7 +27,7 @@ const Location = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <Box sx={{
+                    {/* <Box sx={{
                         p: 4,
                         borderRadius: 6,
                         background: 'rgba(15, 23, 42, 0.8)',
@@ -46,7 +46,7 @@ const Location = () => {
                                 <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 600 }}>{language === 'en' ? 'TAMIL NADU - 621212' : 'தமிழ்நாடு - 621212'}</Typography>
                             </Box>
                         </Stack>
-                    </Box>
+                    </Box> */}
                 </motion.div>
             </Box>
 

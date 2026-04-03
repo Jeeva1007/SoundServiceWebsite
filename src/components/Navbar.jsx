@@ -48,10 +48,12 @@ const Navbar = ({ toggleTheme, mode }) => {
     const navBtnStyle = {
         color: 'text.primary',
         fontWeight: 600,
-        fontSize: '0.95rem',
-        mx: 1,
-        px: 2,
+        fontSize: '0.9rem',
+        mx: 0.5,
+        px: 1.5,
         borderRadius: 2,
+        whiteSpace: 'nowrap',
+        minWidth: 'auto',
         '&:hover': { color: 'primary.main', bgcolor: 'rgba(99,102,241,0.05)' },
         transition: 'all 0.3s ease'
     };
@@ -154,8 +156,8 @@ const Navbar = ({ toggleTheme, mode }) => {
                                 <img src="/assets/logo.png" alt="BODI Sound Logo" style={{ height: '48px', objectFit: 'contain' }} />
                             </Box>
 
-                            {/* Desktop Nav */}
-                            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+                            {/* Desktop Links - Center */}
+                            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', flexGrow: 1, justifyContent: 'center', mx: 2 }}>
                                 {navItems.map((item) => (
                                     <Button key={item.name} href={item.link} sx={navBtnStyle}>
                                         {item.name}
@@ -165,11 +167,26 @@ const Navbar = ({ toggleTheme, mode }) => {
                                 <Box
                                     onMouseEnter={handleMenuOpen}
                                     onMouseLeave={handleMenuClose}
-                                    sx={{ position: 'relative' }}
+                                    sx={{
+                                        position: 'relative',
+                                        height: '100%',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        // Invisible bridge below button to catch hover
+                                        '&::after': {
+                                            content: '""',
+                                            position: 'absolute',
+                                            bottom: -20,
+                                            left: 0,
+                                            width: '100%',
+                                            height: 20,
+                                            zIndex: 1
+                                        }
+                                    }}
                                 >
                                     <Button
                                         endIcon={<KeyboardArrowDownIcon />}
-                                        sx={{ ...navBtnStyle, mr: 2 }}
+                                        sx={navBtnStyle}
                                     >
                                         {t.nav.connect}
                                     </Button>
@@ -186,10 +203,12 @@ const Navbar = ({ toggleTheme, mode }) => {
                                             pointerEvents: 'none',
                                             '& .MuiPaper-root': {
                                                 pointerEvents: 'auto',
-                                                mt: 1,
+                                                mt: 1.5,
                                                 minWidth: 200,
                                                 bgcolor: 'background.paper',
                                                 backgroundImage: 'none',
+                                                border: '1px solid rgba(255,255,255,0.05)',
+                                                boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
                                                 '& .MuiMenuItem-root': {
                                                     py: 1.5,
                                                     px: 3,
@@ -206,12 +225,14 @@ const Navbar = ({ toggleTheme, mode }) => {
                                         ))}
                                     </Menu>
                                 </Box>
+                            </Box>
 
-                                <Box sx={{ height: 30, width: 1, bgcolor: 'rgba(0,0,0,0.1)', mx: 2 }} />
+                            {/* Desktop Actions - Right */}
+                            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 1 }}>
+                                <Box sx={{ height: 24, width: 1, bgcolor: 'rgba(255,255,255,0.1)', mx: 1 }} />
 
-                                {/* Language Selector */}
-                                <IconButton onClick={handleLangOpen} sx={{ color: 'text.primary', ml: 1 }}>
-                                    <LanguageIcon />
+                                <IconButton onClick={handleLangOpen} sx={{ color: 'text.primary', p: 1 }}>
+                                    <LanguageIcon fontSize="small" />
                                 </IconButton>
                                 <Menu
                                     anchorEl={langAnchorEl}
@@ -224,15 +245,24 @@ const Navbar = ({ toggleTheme, mode }) => {
                                     <MenuItem onClick={() => { toggleLanguage('ta'); handleLangClose(); }}>தமிழ் (Tamil)</MenuItem>
                                 </Menu>
 
-                                <IconButton onClick={toggleTheme} sx={{ color: 'text.primary', ml: 1 }}>
-                                    {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+                                <IconButton onClick={toggleTheme} sx={{ color: 'text.primary', p: 1 }}>
+                                    {mode === 'dark' ? <Brightness7Icon fontSize="small" /> : <Brightness4Icon fontSize="small" />}
                                 </IconButton>
 
                                 <Button
                                     variant="contained"
                                     color="primary"
                                     href="#contact"
-                                    sx={{ ml: 3, px: 4, borderRadius: 3, fontWeight: 800 }}
+                                    sx={{
+                                        ml: 1,
+                                        px: 3,
+                                        py: 1,
+                                        borderRadius: 2,
+                                        fontWeight: 800,
+                                        textTransform: 'none',
+                                        fontSize: '0.85rem',
+                                        whiteSpace: 'nowrap'
+                                    }}
                                 >
                                     {t.nav.book}
                                 </Button>
